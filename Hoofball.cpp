@@ -1,37 +1,35 @@
 #include<bits/stdc++.h>
 using namespace std;
-int order, d[100];
-bool through[100];
+
+int order, d[100];//total and distance
+bool through[100];//whether it is passed or not
+int record_next[100], record_prev[100];
 
 int passing_nearest(int indexor) {
-	int temp = INT_MAX, nindexer = -1;
-	for (int j = 0; j < order; j++) {
-		if (j != indexor) {
+	int temp = INT_MAX, nindexer = -1;//find nearest
+	for (int j = 0; j < order; ++j) {
+		if (j != indexor) {//only deal with non-passed
 			int temp_ = abs(d[j] - d[indexor]);
 			if (temp_ < temp || (temp_ == temp && j < nindexer)) {
 				nindexer = j;
 				temp = temp_;
-				through[j] = true;
 			}
 		}
 	}
 	return nindexer;
 }
 
-void self_passing(int init) {
-	for (int j = 0; j < order; j++) {
-		through[j] = false;
-	}
-	int media = passing_nearest(init), counter = 1;
-	while (media != init) {
-		media = passing_nearest(media);
+void self_passing(int init) {//mediate function
+	while (!through[init]) {
+		through[init] = true;
+		init = record_next[init];
 	}
 }
 
 int main() {
-	int ncounter = INT_MAX, final_index;
+	int remain_counter = 0;
 	cin >> order;
-	for (int i = 0; i < order; i++) {
+	for (int i = 0; i < order; ++i) {
 		cin >> d[i];
 	}
 	sort(d, d + order);
@@ -40,10 +38,29 @@ int main() {
 		return 0;
 	}
 
-	for (int i = 0; i < order; i++) {
-		self_passing(i);
-		if (!through[i])++final_index;
+	memset(record_prev, 0, sizeof(record_prev));
+	memset(through, false, sizeof(through));
+
+	for (int i = 0; i < order; ++i) {
+		record_next[i] = passing_nearest(i);
+		record_prev[record_next[i]]++;
 	}
-	std::cout << final_index;
-	return 0;
+
+	//initialize
+	for (int i = 0; i < order; ++i) {
+		if (record_prev[i] == 0) {
+			remain_counter++;
+			self_passing(i); 
+		}
+	}
+    
+    //deal alone
+	for (int i = 0; i < order; ++i) {
+		if (!through[i]) {
+			remain_counter++;
+			self_passing(i);
+		}
+	}
+
+	cout << remain_counter;
 }
