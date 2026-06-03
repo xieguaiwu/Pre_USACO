@@ -1,0 +1,20 @@
+# === C++ Compiled Binaries ===
+# USACO compiles .cpp to same-name executable (no extension)
+# Ignore all files, then selectively un-ignore sources
+
+# Ignore everything by default
+*
+
+# Un-ignore directories (so files inside can be evaluated)
+!*/
+
+# Un-ignore C++ source and header files
+!*.cpp
+!*.h
+!*.hpp
+
+# Un-ignore gitkeep
+!.gitkeep
+
+# Un-ignore this file
+!.gitignore
