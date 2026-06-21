@@ -1,66 +1,83 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int order, d[100];//total and distance
-bool through[100];//whether it is passed or not
-int record_next[100], record_prev[100];
+struct Graph {
+	int position;
+	Graph *next;
+public:
+	void setNext(Graph *set) {
+		next = set;
+	}
+	bool hasNext() {
+		return next != nullptr;
+	}
+};
 
-int passing_nearest(int indexor) {
-	int temp = INT_MAX, nindexer = -1;//find nearest
-	for (int j = 0; j < order; ++j) {
-		if (j != indexor) {//only deal with non-passed
-			int temp_ = abs(d[j] - d[indexor]);
-			if (temp_ < temp || (temp_ == temp && j < nindexer)) {
-				nindexer = j;
-				temp = temp_;
-			}
+int find_next(const Graph, int, int);
+bool all_through(Graph, int);
+void single_test(Graph, int, int);
+bool chain(Graph, int, int);
+
+int find_next(const Graph shit[], int start, int all) {//找最近
+	int pos = shit[start].position;
+	int best = start;
+	int best_dist = -1;
+	for (int i = 0; i < all; ++i) {
+		if (i == start) continue;
+		int dis = abs(pos - shit[i].position);
+		if (dis < best_dist || (dis == best_dist && i < best)) {
+			best_dist = dis;
+			best = i;
 		}
 	}
-	return nindexer;
+	return best;
 }
 
-void self_passing(int init) {//mediate function
-	while (!through[init]) {
-		through[init] = true;
-		init = record_next[init];
+int counter = 0;
+int subcounter = 0;
+bool chain(Graph shit[], int start, int all) {
+	if (shit[start].hasNext()) return false;//遇见了重复环
+	else { 
+        shit[start].setNext(&shit[find_next(shit, start, all)]);
+        ++subcounter;
+    }
+	return true;
+}
+
+bool all_through(Graph shit[], int all) {
+	for (int i = 0; i < all; ++i) {
+		if (!shit[i].hasNext())return false;
+	}
+	return true;
+}
+
+void all_init(Graph shit[], int all) {
+    counter = 0;
+    for (int i = 0; i < all; ++i) {
+        shit[i].next = nullptr;
+    }
+}
+
+void single_test(Graph shit[], int start, int all) {
+	int k = 0;
+	while (!all_through(shit, all)) {
+		if (k >= all) break;
+		chain(shit, k, all);
+		++k;
 	}
 }
 
 int main() {
-	int remain_counter = 0;
-	cin >> order;
-	for (int i = 0; i < order; ++i) {
-		cin >> d[i];
+	int total;
+	cin >> total;
+	Graph *map = new Graph[total];
+	for (int i = 0; i < total; ++i) {
+		cin >> map[i].position;
 	}
-	sort(d, d + order);
-	if (order >= 0 && order <= 2) {
-		cout << order;
-		return 0;
-	}
-
-	memset(record_prev, 0, sizeof(record_prev));
-	memset(through, false, sizeof(through));
-
-	for (int i = 0; i < order; ++i) {
-		record_next[i] = passing_nearest(i);
-		record_prev[record_next[i]]++;
-	}
-
-	//initialize
-	for (int i = 0; i < order; ++i) {
-		if (record_prev[i] == 0) {
-			remain_counter++;
-			self_passing(i); 
-		}
-	}
-    
-    //deal alone
-	for (int i = 0; i < order; ++i) {
-		if (!through[i]) {
-			remain_counter++;
-			self_passing(i);
-		}
-	}
-
-	cout << remain_counter;
+	for (int i = 1; i < total; ++i) {
+        single_test(map, i, total);
+        all_init(map, total);
+    }
+	//cout << min << "\n";
+	delete []map;
 }
