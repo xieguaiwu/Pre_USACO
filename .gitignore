@@ -5,6 +5,9 @@
 # Ignore everything by default
 *
 
+# Explicitly exclude PDF documents (safety net)
+*.pdf
+
 # Un-ignore directories (so files inside can be evaluated)
 !*/
 
