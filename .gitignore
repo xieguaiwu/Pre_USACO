@@ -16,6 +16,9 @@
 !*.h
 !*.hpp
 
+# Un-ignore Markdown docs (roadmap, notes)
+!*.md
+
 # Un-ignore gitkeep
 !.gitkeep
 
