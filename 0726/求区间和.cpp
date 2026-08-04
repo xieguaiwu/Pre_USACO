@@ -1,4 +1,5 @@
 //P8218 【深进1.例1】求区间和
+//第一次做此类题型，起码花了三十分钟然后出了程序，但因为不懂partial_sum函数的语法而不得不让ai调试才出了结果
 #include <bits/stdc++.h>
 
 using namespace std;

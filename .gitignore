@@ -24,3 +24,6 @@
 
 # Un-ignore this file
 !.gitignore
+
+# pi 运行时目录
+.pi-subagents/
