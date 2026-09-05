@@ -19,6 +19,9 @@
 # Un-ignore Markdown docs (roadmap, notes)
 !*.md
 
+# Un-ignore judge tooling
+!*.sh
+
 # Un-ignore gitkeep
 !.gitkeep
 
