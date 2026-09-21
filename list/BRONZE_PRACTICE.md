@@ -8,7 +8,6 @@
 
 | 题号 | 标题 | 考点 | 网址 |
 |---|---|---|---|
-| P1200 | [USACO1.1] 你的飞碟在这儿 | 字符串/取模 | https://www.luogu.com.cn/problem/P1200 |
 | P1201 | [USACO1.1] 贪婪的送礼者 | 模拟/map | https://www.luogu.com.cn/problem/P1201 |
 | P1202 | [USACO1.1] 黑色星期五 | 日期模拟 | https://www.luogu.com.cn/problem/P1202 |
 | P1203 | [USACO1.1] 坏掉的项链 | 环形字符串/枚举 | https://www.luogu.com.cn/problem/P1203 |
