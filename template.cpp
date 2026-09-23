@@ -2,14 +2,16 @@
 using namespace std;
 
 // ═══════════════════════════════════════════════════════════════
-//  使用方法:  cp template.cpp 新题.cpp   →  改下面两行文件名(USACO真题)或保持注释(洛谷)
-//  判样例:    ../test.sh                (samples/ 放好 1.in + 1.out)
+//  使用方法:  cp template.cpp 新题.cpp   →  按题面 I/O 说明决定下面两行
+//  判样例:    cpt test 新题.cpp          (samples/ 放好 1.in + 1.out)
 // ═══════════════════════════════════════════════════════════════
 
-// ★★★ USACO 文件模式 ★★★
-// 规则:  A组/E组 USACO 真题练习 → 取消注释, 文件名改成题面要求的 (如 "mooin")
-//        洛谷日常练习          → 保持注释 (stdin/stdout 即可)
-// ⚠️ 真实比赛忘写这两行 = 每题 0 分, 所以做 USACO 原题时永远走文件模式!
+// ★★★ I/O 模式: 每题先看题面 I/O 说明那一行 ★★★
+// 2020-12 及以后的比赛题  → 标准 IO (cin/cout), 禁写 freopen
+// 2020-12 之前的老题      → 文件 IO, 文件名用题面给的 (如 "ride")
+// USACO Training 页面     → 文件 IO (如 "gift1")
+// ⚠️ 加错的 freopen 比不加更危险 (直接 0 分); 洛谷提交前必确认它处于注释状态
+// ⚠️ 本地 cpt 判样例走 stdin, 而 freopen 会覆盖 stdin → 文件模式下请把样例复制成 ride.in, 直接跑二进制
 // freopen("PROBLEM.in",  "r", stdin);
 // freopen("PROBLEM.out", "w", stdout);
 
